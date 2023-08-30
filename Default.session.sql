@@ -9,7 +9,7 @@ CREATE TABLE student (
     major VARCHAR(20) 
 );
 
--- VERSION 2
+-- VERSION 2 (INCL. CONSTRAINTS)
 CREATE TABLE student (
     student_id INT PRIMARY KEY AUTO_INCREMENT,
     student_name VARCHAR(20) NOT NULL,
@@ -45,8 +45,8 @@ INSERT INTO STUDENT (student_id, student_name, major) VALUES (5, "Rita", "Csc");
 -- INSERTING MULTIPLE ROWS INTO TABLES
 INSERT INTO student VALUES
 (1, "John", "Chemistry"),
-(2, "Ben", "Physics"),
-(3, "Ken", "Maths"),	
+(2, "Ben", "Maths"),
+(3, "Ken", "Physics"),	
 (4, "Jack", "Biology"),
 (5, "Rita", "Csc");
 
@@ -65,7 +65,11 @@ WHERE major = "Biology";
 
 -- DELETING SPECIFIC ROWS IN A TABLE
 DELETE FROM student
-WHERE student_id = 5;
+WHERE major = "undecided";
 
+-- DELETING ALL ROWS IN A TABLE
+DELETE FROM student;
+
+-- SELECT STATEMENT
 -- RETRIEVING ALL DATA FROM A TABLE
 SELECT * FROM student;
