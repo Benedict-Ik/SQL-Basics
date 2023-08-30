@@ -11,16 +11,16 @@ CREATE TABLE student (
 
 -- VERSION 2
 CREATE TABLE student (
-    student_id INT PRIMARY KEY,
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
     student_name VARCHAR(20) NOT NULL,
-    major VARCHAR(20) 
+    major VARCHAR(20) DEFAULT "Undecided"
 );
+
+-- DETERMINING THE CONTENTS IN A TABLE
+DESCRIBE student;
 
 -- DELETING TABLES
 DROP TABLE student;
-
--- KNOWING THE CONTENTS IN A TABLE
-DESCRIBE student;
 
 -- ADDING AN EXTRA COLUMN TO AN EXISTING TABLE
 ALTER TABLE student ADD gpa DECIMA(3,2);
@@ -37,7 +37,7 @@ INSERT INTO student VALUES (5, "Rita", "Csc");
 
 -- SPECIFYING COLUMN TO INSERT DATA INTO
 INSERT INTO STUDENT (student_id, student_name, major) VALUES (1, "Jack", "English");
-INSERT INTO STUDENT (student_id, student_name, major) VALUES (2, "Ben", "Maths");
+INSERT INTO STUDENT (student_id, student_name) VALUES (2, "Ben");
 INSERT INTO STUDENT (student_id, student_name, major) VALUES (3, "Ken", "Physics");
 INSERT INTO STUDENT (student_id, student_name, major) VALUES (4, "Joy", "Chemistry");
 INSERT INTO STUDENT (student_id, student_name, major) VALUES (5, "Rita", "Csc");
@@ -51,12 +51,12 @@ INSERT INTO student VALUES
 (5, "Rita", "Csc");
 
 -- INSERTING MULTIPLE ROWS TO A TABLE (2)
-INSERT INTO STUDENT (student_id, student_name, major) VALUES 
-(1, "Jack", "English"),
-(2, "Ben", "Maths"),
-(3, "Ken", "Physics"),
-(4, "Joy", "Chemistry"),
-(5, "Rita", "Csc");
+INSERT INTO STUDENT (Student_name, major) VALUES 
+("Jack", "English"),
+("Ben", "Maths"),
+("Ken", "Physics"),
+("Joy", "Chemistry"),
+("Rita", "Csc");
 
 -- UPDATING SPECIFIC ROWS IN A TABLE
 UPDATE student
