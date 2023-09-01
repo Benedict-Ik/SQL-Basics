@@ -16,7 +16,6 @@ CREATE TABLE student (
     major VARCHAR(20) DEFAULT "Undecided"
 );
 
-
 -- USERS SCHEMA
 CREATE TABLE users(
     id INT PRIMARY KEY,
@@ -41,6 +40,7 @@ DESCRIBE users;
 
 -- DELETING TABLES
 DROP TABLE student;
+DROP TABLE users;
 
 -- ADDING AN EXTRA COLUMN TO AN EXISTING TABLE
 ALTER TABLE student ADD gpa DECIMA(3,2);
@@ -104,4 +104,7 @@ DELETE FROM student;
 SELECT * FROM student;
 SELECT * FROM users;
 
--- 
+-- RETRIEVING SPECIFIC COLUMNS FROM A TABLE
+SELECT first_name, last_name
+FROM users
+ORDER BY first_name DESC;
