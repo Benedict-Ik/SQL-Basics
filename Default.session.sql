@@ -16,8 +16,28 @@ CREATE TABLE student (
     major VARCHAR(20) DEFAULT "Undecided"
 );
 
+
+-- USERS SCHEMA
+CREATE TABLE users(
+    id INT PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    age INT,
+    status VARCHAR(20)
+);
+
+-- USERS SCHEMA OPT 2
+CREATE TABLE users(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(20),
+    last_name VARCHAR(20),
+    age INT,
+    status VARCHAR(20)
+);
+
 -- DETERMINING THE CONTENTS IN A TABLE
 DESCRIBE student;
+DESCRIBE users;
 
 -- DELETING TABLES
 DROP TABLE student;
@@ -58,6 +78,15 @@ INSERT INTO STUDENT (Student_name, major) VALUES
 ("Joy", "Chemistry"),
 ("Rita", "Csc");
 
+-- INSERTING MULTIPLE ROWS INTO USERS TABLES
+INSERT INTO users VALUES
+(1, "Ben", "Odoh", 23, "Single"),
+(2, "Jane", "Bonnie", 30, "Married"),
+(3, "Terry", "Crews", 31, "Married"),
+(4, "Aaron", "Savage", 35, "Single"),
+(5, "Alice", "Cameron", 24, "Single"),
+(6, "Martha", "Anne", 27, "Married");
+
 -- UPDATING SPECIFIC ROWS IN A TABLE
 UPDATE student
 SET major = "Bio" 
@@ -73,5 +102,6 @@ DELETE FROM student;
 -- SELECT STATEMENT
 -- RETRIEVING ALL DATA FROM A TABLE
 SELECT * FROM student;
+SELECT * FROM users;
 
 -- 
