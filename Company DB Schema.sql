@@ -1,7 +1,7 @@
 -- COMPANY DB SCHEMA
 -- EMPLOYEES SCHEMA
 CREATE TABLE employees(
-    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT PRIMARY KEY,
     name VARCHAR(40),
     age INT,
     sex VARCHAR(1),
@@ -20,8 +20,8 @@ CREATE TABLE branch(
 
 -- CLIENT SCHEMA
 CREATE TABLE client(
-    client_id INT PRIMARY KEY AUTO_INCREMENT,
-    client_name VARCHAR(24),
+    client_id INT PRIMARY KEY,
+    client_name VARCHAR(40),
     branch_id INT,
     FOREIGN KEY(branch_id)
     REFERENCES branch(branch_id)
@@ -30,24 +30,34 @@ CREATE TABLE client(
 
 -- WORKS_WITH SCHEMA
 CREATE TABLE works_with(
-    emp_id INT PRIMARY KEY AUTO_INCREMENT,
-    client_id INT,
-    total_sales DECIMAL(10,2)
+    emp_id INT PRIMARY KEY,
+    client_id INT PRIMARY KEY,
+    total_sales DECIMAL(10,2),
+    FOREIGN KEY(emp_id) REFERENCES employees(emp_id) ON DELETE CASCADE,
+    FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
 );
 
 CREATE TABLE branch_supplier(
-    branch_id INT PRIMARY KEY AUTO_INCREMENT,
-    supplier_name VARCHAR(20),
-    supplier_type VARCHAR(20)
+    branch_id INT PRIMARY KEY,
+    supplier_name VARCHAR(40),
+    supplier_type VARCHAR(40),
+    FOREIGN KEY(branch_id)
+    ON DELETE SET CASCADE
 );
 
 -- DETERMINING THE CONTENTS IN A TABLE
 DESCRIBE employees;
 DESCRIBE branch;
 DESCRIBE client;
+DESCRIBE works_with;
+DESCRIBE branch_supplier;
 
 -- DELETING TABLES
 DROP TABLE employees;
+DROP TABLE branch;
+DROP TABLE client;
+DROP TABLE works_with;
+DROP TABLE branch_supplier;
 
 -- ADDING BRANCH ID AS FOREIGN KEY TO EMPLOYEE TABLE
 ALTER TABLE employees
