@@ -159,3 +159,67 @@ INSERT INTO client VALUES
 (406, "Procter & Gamble", 3),
 (407, "Nestle", 3),
 (408, "Kraft Heinz", 3);
+
+-- DATA ENTRY FOR WORKS_WITH TABLE
+INSERT INTO works_with VALUES
+(102, 400, 370000.00),
+(103, 401, 300000.00),
+(104, 402, 500000.00),
+(105, 403, 480000.00),
+(106, 404, 140000.00),
+(107, 405, 900000.00),
+(107, 406, 650000.00),
+(108, 407, 370000.00),
+(108, 408, 700000.00);
+
+
+-- BASIC QUERIES
+-- find all employees ordered by salaries, ranked from highest to lowest
+SELECT *
+FROM employees
+ORDER BY salary DESC;
+
+-- find all employees ordered by sex, then name
+SELECT *
+FROM employees
+ORDER BY sex, name;
+
+-- find the first five employees
+SELECT *
+FROM employees
+LIMIT 5;
+-- OR
+SELECT *
+FROM employees
+WHERE emp_id <=104;
+
+-- find out all the different genders in employees table
+SELECT DISTINCT sex
+FROM employees;
+
+-- find the total number of employees
+SELECT COUNT(emp_id)
+FROM employees;
+
+-- find the total number of male employees aged 35 and below
+SELECT COUNT(emp_id)
+FROM employees
+WHERE sex = "M" AND age <=35;
+
+-- find the average of all employees' salaries
+SELECT AVG(salary)
+FROM employees;
+
+-- find the sum of all employees' salary
+SELECT SUM(salary)
+FROM employees;
+
+-- find out how much all male and female employees make
+SELECT sex, SUM(salary)
+FROM employees
+GROUP BY sex;
+
+-- find the ttal sales from each salesman
+SELECT emp_id, SUM(total_sales)
+FROM works_with
+GROUP BY emp_id;
