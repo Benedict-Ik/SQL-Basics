@@ -57,6 +57,22 @@ DESCRIBE client;
 DESCRIBE works_with;
 DESCRIBE branch_supplier;
 
+-- RETRIEVING DATA FROM TABLES
+SELECT *
+FROM employees;
+
+SELECT *
+FROM branch;
+
+SELECT *
+FROM branch_supplier;
+
+SELECT *
+FROM client;
+
+SELECT *
+FROM works_with;
+
 -- DELETING TABLES
 DROP TABLE employees;
 DROP TABLE branch;
@@ -76,8 +92,7 @@ ADD FOREIGN KEY(super_id)
 REFERENCES employees(emp_id)
 ON DELETE SET NULL;
 
--- INSERTING DATA INTO TABLES
--- INSERTING DATA INTO EMPLOYEES TABLES
+-- DATA ENTRY FOR EMPLOYEES TABLE
 -- INSERTING DATA FOR EMPLOYEE/MANAGER IN CORPORATE BRANCH
 INSERT INTO employees VALUES(100, "John Cooper", 50, "M", 390000.00, NULL, NULL);
 -- branch id had no values as no entry has been made for branch table
@@ -121,8 +136,26 @@ UPDATE employees
 SET branch_id = 3
 WHERE emp_id = 107;
 
-SELECT *
-FROM employees;
 
-SELECT *
-FROM branch;
+-- DATA ENTRY FOR BRANCH_SUPPLIER TABLE
+INSERT INTO branch_supplier VALUES
+(2, "Hammer Mill", "Paper"),
+(2, "Uni Ball", "Writing Utensils"),
+(3, "Patriot Paper", "Paper"),
+(3, "J.T Forms & Labels", "Custom Forms"),
+(1, "Hammer Mill", "Paper"),
+(2, "Stamford Labels", "CustOm Forms"),
+(3, "Uni Ball", "Writing Utensils");
+
+
+-- DATA ENTRY FOR CLIENT TABLE
+INSERT INTO client VALUES
+(400, "Dufil International", 1),
+(401, "Times Newspaper", 1),
+(402, "Fed Ex", 2),
+(403, "Unilever Nig Plc", 2),
+(404, "Nestle", 2),
+(405, "Fed Ex", 3),
+(406, "Procter & Gamble", 3),
+(407, "Nestle", 3),
+(408, "Kraft Heinz", 3);
