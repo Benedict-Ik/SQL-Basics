@@ -239,7 +239,16 @@ SELECT emp_id, name
 FROM employees
 WHERE name LIKE "%shley";
 
--- find employer whose name ends with "per"
+-- find employee whose name ends with "per"
 SELECT emp_id, name
 FROM employees
 WHERE name LIKE "_____Coo%";
+
+
+-- UNION
+-- find a list of all clients and branch suppliers' names
+SELECT client_name AS name, client.branch_id
+FROM client
+UNION
+SELECT supplier_name, branch_supplier.branch_id
+FROM branch_supplier;
