@@ -219,7 +219,27 @@ SELECT sex, SUM(salary)
 FROM employees
 GROUP BY sex;
 
--- find the ttal sales from each salesman
+-- find the total sales from each salesman
 SELECT emp_id, SUM(total_sales)
 FROM works_with
 GROUP BY emp_id;
+
+-- find the total income received from each client
+SELECT client_id, SUM(total_sales)
+FROM works_with
+GROUP BY client_id;
+
+-- WILDCARDS
+-- find employees whose name begins with A
+SELECT emp_id, name
+FROM employees
+WHERE name LIKE "A%";
+
+SELECT emp_id, name
+FROM employees
+WHERE name LIKE "%shley";
+
+-- find employer whose name ends with "per"
+SELECT emp_id, name
+FROM employees
+WHERE name LIKE "_____Coo%";
