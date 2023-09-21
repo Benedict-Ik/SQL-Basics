@@ -265,7 +265,7 @@ FROM branch_supplier;
 -- JOINS
 -- find all branches and the names of their managers
 -- it is best practice to use the dot notation where there are multiple tables being referenced
-SELECT  employees.emp_id, employees.name, branch.branch_name
+SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
 FROM employees
 JOIN branch
 ON employees.emp_id = branch.manager_id;
