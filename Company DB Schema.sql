@@ -136,6 +136,14 @@ UPDATE employees
 SET branch_id = 3
 WHERE emp_id = 107;
 
+-- CREATING A DUMMY BRANCH
+INSERT INTO branch VALUES
+(4, "Chicago", NULL);
+
+-- DELETING DUMMY BRANCH
+DELETE FROM branch
+WHERE branch_id = 4;
+
 
 -- DATA ENTRY FOR BRANCH_SUPPLIER TABLE
 INSERT INTO branch_supplier VALUES
@@ -252,3 +260,13 @@ FROM client
 UNION
 SELECT supplier_name, branch_supplier.branch_id
 FROM branch_supplier;
+
+
+-- JOINS
+-- find all branches and the names of their managers
+-- it is best practice to use the dot notation where there are multiple tables being referenced
+SELECT  employees.emp_id, employees.name, branch.branch_name
+FROM employees
+JOIN branch
+ON employees.emp_id = branch.manager_id;
+-- the above shows a relationship between the employees and branch tables
