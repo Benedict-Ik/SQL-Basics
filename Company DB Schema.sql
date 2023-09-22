@@ -269,4 +269,18 @@ SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
 FROM employees
 JOIN branch
 ON employees.emp_id = branch.manager_id;
--- the above shows a relationship between the employees and branch tables
+-- the above returns the output where there is a relationship between the employees and branch tables
+
+SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
+FROM employees
+LEFT JOIN branch
+ON employees.emp_id = branch.manager_id;
+-- the above also returns the output from all rows from the left table and the matched rows from the right table
+-- in areas where there is no relationship, it returns NULL values
+
+SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
+FROM employees
+RIGHT JOIN branch
+ON employees.emp_id = branch.manager_id;
+-- the above also returns the output from all rows from the right table and the matched rows from the left table
+-- in areas where there is no relationship, it returns NULL values
