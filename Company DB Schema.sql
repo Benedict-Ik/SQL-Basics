@@ -56,6 +56,7 @@ DESCRIBE branch;
 DESCRIBE client;
 DESCRIBE works_with;
 DESCRIBE branch_supplier;
+DESCRIBE trigger_test;
 
 -- RETRIEVING DATA FROM TABLES
 SELECT *
@@ -73,12 +74,16 @@ FROM client;
 SELECT *
 FROM works_with;
 
+SELECT *
+FROM trigger_test;
+
 -- DELETING TABLES
 DROP TABLE employees;
 DROP TABLE branch;
 DROP TABLE client;
 DROP TABLE works_with;
 DROP TABLE branch_supplier;
+DROP TABLE trigger_test;
 
 -- ADDING BRANCH ID AS FOREIGN KEY TO EMPLOYEE TABLE
 ALTER TABLE employees
@@ -111,6 +116,9 @@ INSERT INTO employees VALUES(107, "London Bershley", 24, "F", 350000.00, 106, NU
 -- UPDATING ALL OTHER ENTRIES FOR EMPLOYEES IN LONDON BRANCH
 INSERT INTO employees VALUES
 (108, "Michael Scott", 27, "M", 180000.00, 106, 3);
+-- Trigger Test Employee name
+INSERT INTO employees (emp_id, name, age, sex, salary, super_id, branch_id) 
+VALUES(109, "Tessy Hallmark", 33, "F", 250000.00, 106, 3);
 
 -- CREATING CORPORATE BRANCH
 INSERT INTO branch VALUES(1, "Corporate", 100);
@@ -143,6 +151,10 @@ INSERT INTO branch VALUES
 -- DELETING DUMMY BRANCH
 DELETE FROM branch
 WHERE branch_id = 4;
+
+-- Deleting an employee
+DELETE FROM employees
+WHERE emp_id = 109;
 
 
 -- DATA ENTRY FOR BRANCH_SUPPLIER TABLE
@@ -275,12 +287,55 @@ SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
 FROM employees
 LEFT JOIN branch
 ON employees.emp_id = branch.manager_id;
--- the above also returns the output from all rows from the left table and the matched rows from the right table
+-- the above returns the output from all rows from the left table and the matched rows from the right table
 -- in areas where there is no relationship, it returns NULL values
 
 SELECT  employees.emp_id, employees.name AS manager_name, branch.branch_name
 FROM employees
 RIGHT JOIN branch
 ON employees.emp_id = branch.manager_id;
--- the above also returns the output from all rows from the right table and the matched rows from the left table
+-- the above returns the output from all rows from the right table and the matched rows from the left table
 -- in areas where there is no relationship, it returns NULL values
+
+
+-- NESTED QUERIES
+-- it is advisable to use dot notation in nested queries
+-- find names of all employees who have sold over 300k to a single client
+SELECT employees.emp_id, employees.name
+FROM employees
+WHERE emp_id IN (
+    SELECT works_with.emp_id
+    FROM works_with
+    WHERE total_sales > 300000
+);
+
+-- find all clients who are handled by the branch that London Bershley manages
+SELECT client.client_name
+FROM client
+WHERE client.branch_id IN (
+    SELECT branch.branch_id
+    FROM branch
+    WHERE manager_id = 107
+);
+
+
+-- TRIGGERS
+CREATE TABLE trigger_test(
+    message VARCHAR(255),
+    message_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO trigger_test VALUES ("Added new employee", CURRENT_TIMESTAMP);
+
+
+
+-- first trigger // Had issues using trigger to automate.
+DELIMITER $$
+CREATE
+    TRIGGER trigger1 AFTER INSERT
+    ON employees
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES
+        ("Added new employee");
+    END $$
+DELIMITER ;
